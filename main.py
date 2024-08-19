@@ -1,5 +1,5 @@
 import requests
-import smtplib
+from send_email import send_email
 
 api_key = "d5eb6598980047fea683defa2a9bd864"
 url = "https://newsapi.org/v2/everything?q=tesla&from=2024-07-19" \
@@ -13,8 +13,13 @@ request = requests.get(url)
 content = request.json()
 
 # Access the article titles and description
+
+body = ""
 for article in content["articles"]:
-      print(content["title"])
-      print(content["description"])
+      if article["title"] is not None and article["description"] is not None:
+            body = body + article["title"] + "\n" + article["description"] + 2*"\n"
+
 
 # Email the content
+body = body.encode("utf-8")
+send_email(message=body)

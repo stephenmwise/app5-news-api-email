@@ -1,7 +1,8 @@
-import smtplib, ssl
+import smtplib
+import ssl
 
 def send_email(message):
-    host = smtp.gmail.com
+    host = "smtp.gmail.com"
     port = 465
 
     username = "test@gmail.com"
